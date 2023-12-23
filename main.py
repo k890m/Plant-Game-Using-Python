@@ -26,7 +26,8 @@ BACKGROUND_MAIN = pygame.transform.scale(BACKGROUND_IMG, (WIDTH, HEIGHT))
 
 
 # Start window
-def draw_window(plant, raindrops, blackdrops):
+def draw_window(plant, raindrops, blackdrops, score):
+
     WIN.blit(BACKGROUND_MAIN, (0,0))
     
     WIN.blit(PLANT, (plant.x, plant.y))
@@ -36,7 +37,11 @@ def draw_window(plant, raindrops, blackdrops):
         
     for drop in blackdrops:
         WIN.blit(drop['image'], (drop['x'], drop['y']))
-    
+        
+    font = pygame.font.Font(None, 36)
+    score_text = font.render(f"Score: {score}", True, WHITE)
+    WIN.blit(score_text, (10, 10))
+
     pygame.display.update()
     
 # Making raindrops
@@ -57,7 +62,10 @@ def create_blackdrops():
 
 
 def main():
+    pygame.font.init()
+    
     plant = pygame.Rect(100, 600, PLANT_WIDTH, PLANT_HEIGHT)
+    score = 0
     raindrops = []
     blackdrops = []
 
@@ -81,20 +89,28 @@ def main():
         if random.random() < .02:
             raindrops.append(create_raindrops())
              
-        if random.random() < .02:
+        if random.random() < .01:
             blackdrops.append(create_blackdrops())
             
         for raindrop in raindrops:
             raindrop['y'] += VEL
+        
+            if plant.colliderect(pygame.Rect(raindrop['x'], raindrop['y'], RAINDROP_WIDTH, RAINDROP_HEIGHT)):
+                score += 1
+                raindrops.remove(raindrop)
             
         for drop in blackdrops:
             drop['y'] += VEL
+            
+            if plant.colliderect(pygame.Rect(drop['x'], drop['y'], RAINDROP_WIDTH, RAINDROP_HEIGHT)):
+                score -= 1
+                blackdrops.remove(drop)
             
         #clear raindrops afterwords
         raindrops = [raindrop for raindrop in raindrops if raindrop['y'] < HEIGHT]
         blackdrops = [drop for drop in blackdrops if drop['y'] < HEIGHT]
 
-        draw_window(plant, raindrops, blackdrops)
+        draw_window(plant, raindrops, blackdrops, score)
 
     pygame.quit()
 
