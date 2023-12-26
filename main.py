@@ -3,7 +3,7 @@ import random
 import os
 
 
-WIDTH, HEIGHT = 500, 700
+WIDTH, HEIGHT = 700, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Grow The Plant!")
 
