@@ -46,22 +46,13 @@ def draw_window(plant, raindrops, blackdrops, score, lives):
 
     pygame.display.update()
     
-# Making raindrops
-def create_raindrops():
+    
+def create_drops(IMG):
     return {
-        'image': pygame.transform.scale(RAINDROP_IMG, (RAINDROP_WIDTH, RAINDROP_HEIGHT)),
+        'image': pygame.transform.scale(IMG, (RAINDROP_WIDTH, RAINDROP_HEIGHT)),
         'x': random.randint(0, WIDTH - RAINDROP_WIDTH),
         'y': -RAINDROP_HEIGHT
     }
-
-#Make black raindrops NOT DONE YET
-def create_blackdrops():
-    return {
-        'image': pygame.transform.scale(BLACKDROP_IMG, (RAINDROP_WIDTH, RAINDROP_HEIGHT)),
-        'x': random.randint(0, WIDTH - RAINDROP_WIDTH),
-        'y': -RAINDROP_HEIGHT
-    }
-
 
 def main():
     pygame.font.init()
@@ -90,10 +81,10 @@ def main():
 
         #New Raindrops
         if random.random() < .02:
-            raindrops.append(create_raindrops())
+            raindrops.append(create_drops(RAINDROP_IMG))
              
         if random.random() < .01:
-            blackdrops.append(create_blackdrops())
+            blackdrops.append(create_drops(BLACKDROP_IMG))
             
         for raindrop in raindrops:
             raindrop['y'] += VEL
