@@ -7,7 +7,7 @@ WIDTH, HEIGHT = 700, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Grow The Plant!")
 
-WHITE = (255,255,255)
+BLACK = (0,0,0)
 
 FPS = 60
 VEL = 5
@@ -21,7 +21,7 @@ RAINDROP_IMG = pygame.image.load(os.path.join('Assets', 'raindrop.png'))
 RAINDROP_WIDTH, RAINDROP_HEIGHT = 15, 15
 BLACKDROP_IMG = pygame.image.load(os.path.join('Assets', 'blackdrop.png'))
 
-BACKGROUND_IMG = pygame.image.load(os.path.join('Assets', 'back.jpg'))
+BACKGROUND_IMG = pygame.image.load(os.path.join('Assets', 'background.jpg'))
 BACKGROUND_MAIN = pygame.transform.scale(BACKGROUND_IMG, (WIDTH, HEIGHT))
 
 
@@ -39,7 +39,7 @@ def draw_window(plant, raindrops, blackdrops, score):
         WIN.blit(drop['image'], (drop['x'], drop['y']))
         
     font = pygame.font.Font(None, 36)
-    score_text = font.render(f"Score: {score}", True, WHITE)
+    score_text = font.render(f"Score: {score}", True, BLACK)
     WIN.blit(score_text, (10, 10))
 
     pygame.display.update()
