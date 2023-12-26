@@ -18,7 +18,7 @@ PLANT = pygame.transform.scale(PLANT_IMG, (PLANT_WIDTH, PLANT_HEIGHT))
 
 
 RAINDROP_IMG = pygame.image.load(os.path.join('Assets', 'raindrop.png'))
-RAINDROP_WIDTH, RAINDROP_HEIGHT = 24, 36
+RAINDROP_WIDTH, RAINDROP_HEIGHT = 15, 15
 BLACKDROP_IMG = pygame.image.load(os.path.join('Assets', 'blackdrop.png'))
 
 BACKGROUND_IMG = pygame.image.load(os.path.join('Assets', 'back.jpg'))
