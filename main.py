@@ -26,7 +26,7 @@ BACKGROUND_MAIN = pygame.transform.scale(BACKGROUND_IMG, (WIDTH, HEIGHT))
 
 
 # Start window
-def draw_window(plant, raindrops, blackdrops, score):
+def draw_window(plant, raindrops, blackdrops, score, lives):
 
     WIN.blit(BACKGROUND_MAIN, (0,0))
     
@@ -40,7 +40,9 @@ def draw_window(plant, raindrops, blackdrops, score):
         
     font = pygame.font.Font(None, 36)
     score_text = font.render(f"Score: {score}", True, BLACK)
+    lives_text = font.render(f"Lives Left: {lives}", True, BLACK)
     WIN.blit(score_text, (10, 10))
+    WIN.blit(lives_text, (550,10))
 
     pygame.display.update()
     
@@ -66,6 +68,7 @@ def main():
     
     plant = pygame.Rect(100, 600, PLANT_WIDTH, PLANT_HEIGHT)
     score = 0
+    lives = 3
     raindrops = []
     blackdrops = []
 
@@ -104,13 +107,17 @@ def main():
             
             if plant.colliderect(pygame.Rect(drop['x'], drop['y'], RAINDROP_WIDTH, RAINDROP_HEIGHT)):
                 score -= 1
+                lives -= 1
                 blackdrops.remove(drop)
+                
+                if lives == 0:
+                    pygame.quit()
             
         #clear raindrops afterwords
         raindrops = [raindrop for raindrop in raindrops if raindrop['y'] < HEIGHT]
         blackdrops = [drop for drop in blackdrops if drop['y'] < HEIGHT]
 
-        draw_window(plant, raindrops, blackdrops, score)
+        draw_window(plant, raindrops, blackdrops, score, lives)
 
     pygame.quit()
 
