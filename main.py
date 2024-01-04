@@ -24,6 +24,21 @@ BLACKDROP_IMG = pygame.image.load(os.path.join('Assets', 'blackdrop.png'))
 BACKGROUND_IMG = pygame.image.load(os.path.join('Assets', 'background.jpg'))
 BACKGROUND_MAIN = pygame.transform.scale(BACKGROUND_IMG, (WIDTH, HEIGHT))
 
+# Title screen
+def draw_title_screen():
+    WIN.blit(BACKGROUND_MAIN, (0, 0))
+
+    title_font = pygame.font.Font(None, 72)
+    title_text = title_font.render("Grow The Plant!", True, BLACK)
+    WIN.blit(title_text, ((WIDTH - title_text.get_width()) // 2, HEIGHT // 4))
+
+    start_font = pygame.font.Font(None, 36)
+    start_text = start_font.render("Press SPACE to start", True, BLACK)
+    WIN.blit(start_text, ((WIDTH - start_text.get_width()) // 2, HEIGHT // 2))
+
+    pygame.display.update()
+
+
 
 # Start window
 def draw_window(plant, raindrops, blackdrops, score, lives):
@@ -54,6 +69,9 @@ def create_drops(IMG):
         'y': -RAINDROP_HEIGHT
     }
 
+
+
+
 def main():
     pygame.font.init()
     
@@ -64,6 +82,21 @@ def main():
     blackdrops = []
 
     clock = pygame.time.Clock()
+    
+    title_screen = True
+
+    while title_screen:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                title_screen = False
+
+        draw_title_screen()
+
+    
+    
     run = True 
     
     # Loop to Run Program
