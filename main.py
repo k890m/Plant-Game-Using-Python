@@ -39,6 +39,39 @@ def draw_title_screen():
     pygame.display.update()
 
 
+# End Screen
+def draw_end_screen(score):
+    WIN.blit(BACKGROUND_MAIN, (0, 0))
+
+    title_font = pygame.font.Font(None, 72)
+    title_text = title_font.render(f"Your Score: {score}", True, BLACK)
+    WIN.blit(title_text, ((WIDTH - title_text.get_width()) // 2, HEIGHT // 4))
+
+    play_again_font = pygame.font.Font(None, 36)
+    play_again_text = play_again_font.render("Press SPACE To Quit", True, BLACK)
+    WIN.blit(play_again_text, ((WIDTH - play_again_text.get_width()) // 2, HEIGHT // 2))
+
+    pygame.display.update()
+
+    waiting_for_input = True
+    while waiting_for_input:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                # Reset game state
+                reset_game()
+                waiting_for_input = False
+
+# Reset the game   
+def reset_game():
+    global score, lives, raindrops, blackdrops
+
+    score = 0
+    lives = 3
+    raindrops = []
+    blackdrops = []
 
 # Start window
 def draw_window(plant, raindrops, blackdrops, score, lives):
@@ -68,7 +101,6 @@ def create_drops(IMG):
         'x': random.randint(0, WIDTH - RAINDROP_WIDTH),
         'y': -RAINDROP_HEIGHT
     }
-
 
 
 
@@ -130,12 +162,11 @@ def main():
             drop['y'] += VEL
             
             if plant.colliderect(pygame.Rect(drop['x'], drop['y'], RAINDROP_WIDTH, RAINDROP_HEIGHT)):
-                score -= 1
                 lives -= 1
                 blackdrops.remove(drop)
                 
                 if lives == 0:
-                    pygame.quit()
+                    run = False
             
         #clear raindrops afterwords
         raindrops = [raindrop for raindrop in raindrops if raindrop['y'] < HEIGHT]
@@ -143,6 +174,8 @@ def main():
 
         draw_window(plant, raindrops, blackdrops, score, lives)
 
+    draw_end_screen(score)
+    
     pygame.quit()
 
 if __name__ == "__main__":
