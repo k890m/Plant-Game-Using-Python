@@ -26,12 +26,12 @@ Grow The Plant! is a simple Pygame-based game where you control a plant to catch
 Clone the repository:
 
 ```
-git clone https://github.com/your-username/grow-the-plant.git
+git clone https://github.com/k890m/Plant-Game-Using-Python.git
 ```
 
 Navigate to the project directory:
 ```
-cd grow-the-plant
+cd Plant-Game-Using-Python
 ```
 
 Install the required dependencies:
@@ -42,7 +42,7 @@ pip install pygame
 ## Usage
 Run the game by executing the following command:
 ```
-python grow_the_plant.py
+python main.py
 ```
 
 Use the left and right arrow keys to control the plant. Catch raindrops to increase your score, but be careful not to touch black drops and lose lives.
