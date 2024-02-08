@@ -48,7 +48,7 @@ def draw_end_screen(score):
     WIN.blit(title_text, ((WIDTH - title_text.get_width()) // 2, HEIGHT // 4))
 
     play_again_font = pygame.font.Font(None, 36)
-    play_again_text = play_again_font.render("Press SPACE To Quit", True, BLACK)
+    play_again_text = play_again_font.render("Press SPACE To Go To Main Page", True, BLACK)
     WIN.blit(play_again_text, ((WIDTH - play_again_text.get_width()) // 2, HEIGHT // 2))
 
     pygame.display.update()
@@ -60,19 +60,17 @@ def draw_end_screen(score):
                 pygame.quit()
                 return
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                # Reset game state
                 reset_game()
                 waiting_for_input = False
 
 # Reset the game   
 def reset_game():
     global score, lives, raindrops, blackdrops
-
     score = 0
     lives = 3
     raindrops = []
     blackdrops = []
-
+    
 # Start window
 def draw_window(plant, raindrops, blackdrops, score, lives):
 
@@ -139,7 +137,7 @@ def game_loop():
         elif keys_pressed[pygame.K_RIGHT] and plant.x + VEL < WIDTH - PLANT_WIDTH:  # RIGHT KEY
             plant.x += VEL
 
-                #New Raindrops
+        #New Raindrops
         if random.random() < .02:
             raindrops.append(create_drops(RAINDROP_IMG))
              
@@ -175,82 +173,6 @@ def game_loop():
             reset_game()  # Reset the game state
 
 
-'''
-def main():
-    pygame.font.init()
-    
-    plant = pygame.Rect(100, 600, PLANT_WIDTH, PLANT_HEIGHT)
-    score = 0
-    lives = 3
-    raindrops = []
-    blackdrops = []
-
-    clock = pygame.time.Clock()
-    
-    title_screen = True
-
-    while title_screen:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                title_screen = False
-
-        draw_title_screen()
-
-    
-    
-    run = True 
-    
-    # Loop to Run Program
-    while run: 
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-
-        keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[pygame.K_LEFT] and plant.x - VEL > 0: #LEFT KEY
-            plant.x -= VEL
-        elif keys_pressed[pygame.K_RIGHT] and plant.x + VEL < WIDTH - PLANT_WIDTH:  #RIGHT KEY
-            plant.x += VEL
-
-        #New Raindrops
-        if random.random() < .02:
-            raindrops.append(create_drops(RAINDROP_IMG))
-             
-        if random.random() < .02:
-            blackdrops.append(create_drops(BLACKDROP_IMG))
-            
-        for raindrop in raindrops:
-            raindrop['y'] += VEL
-        
-            if plant.colliderect(pygame.Rect(raindrop['x'], raindrop['y'], RAINDROP_WIDTH, RAINDROP_HEIGHT)):
-                score += 1
-                raindrops.remove(raindrop)
-            
-        for drop in blackdrops:
-            drop['y'] += VEL
-            
-            if plant.colliderect(pygame.Rect(drop['x'], drop['y'], RAINDROP_WIDTH, RAINDROP_HEIGHT)):
-                lives -= 1
-                blackdrops.remove(drop)
-                
-                if lives == 0:
-                    run = False
-            
-        #clear raindrops afterwords
-        raindrops = [raindrop for raindrop in raindrops if raindrop['y'] < HEIGHT]
-        blackdrops = [drop for drop in blackdrops if drop['y'] < HEIGHT]
-
-        draw_window(plant, raindrops, blackdrops, score, lives)
-
-    draw_end_screen(score)
-    
-    pygame.quit()
-    
-    '''
 def main():
     pygame.font.init()
     
