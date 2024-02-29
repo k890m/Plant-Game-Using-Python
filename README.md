@@ -10,14 +10,6 @@ Grow The Plant! is a simple Pygame-based game where you control a plant to catch
 * Lives system: Avoid black drops to prevent losing lives.
 * Responsive design: The game window adjusts to a standard size for a consistent experience.
 
-## Screenshots
-
-![Start Screen displaying title 'Grow That Plant!' and 'Press SPACE to Play'](/Assets/startscreen.png)
-
-![Game Play with Plant at the bottom and score of 3. Lives left: 2](/Assets/game.png)
-
-![end screen diplaying score of 31.](./Assets/endscreen.png)
-
 ## Prerequisites
 * Python 3.x
 * Pygame library
@@ -48,5 +40,13 @@ python main.py
 Use the left and right arrow keys to control the plant. Catch raindrops to increase your score, but be careful not to touch black drops and lose lives.
 
 Press the SPACE key to restart the game after losing all lives.
+
+## Screenshots
+
+![Start Screen displaying title 'Grow That Plant!' and 'Press SPACE to Play'](/Assets/startscreen.png)
+
+![Game Play with Plant at the bottom and score of 3. Lives left: 2](/Assets/game.png)
+
+![end screen diplaying score of 31.](./Assets/endscreen.png)
 
 
